@@ -3,13 +3,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import {Dashboard} from '../dashboard';
-import {ExpenseEntry} from '../expenseEntry';
-import {ExpenseList} from '../expenseList';
+import {Categories} from '../categories';
+import {CustomDrawerContent} from '../../_master/globalComponents/drawer/CustomDrawerContent';
+import {Expenses} from '../expenses';
 
 export type NavigationsParamList = {
   Dashboard: undefined;
-  ExpenseEntry: undefined;
-  ExpenseList: undefined;
+  Categories: undefined;
+  Expenses: undefined;
 };
 
 const Drawer = createDrawerNavigator<NavigationsParamList>();
@@ -17,10 +18,12 @@ const Drawer = createDrawerNavigator<NavigationsParamList>();
 export function Navigations() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Dashboard">
+      <Drawer.Navigator
+        drawerContent={props => <CustomDrawerContent {...props} />}
+        initialRouteName="Dashboard">
         <Drawer.Screen name="Dashboard" component={Dashboard} />
-        <Drawer.Screen name="ExpenseEntry" component={ExpenseEntry} />
-        <Drawer.Screen name="ExpenseList" component={ExpenseList} />
+        <Drawer.Screen name="Categories" component={Categories} />
+        <Drawer.Screen name="Expenses" component={Expenses} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
