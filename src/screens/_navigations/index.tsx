@@ -1,11 +1,12 @@
-import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
 
-import {Dashboard} from '../dashboard';
+import {CustomDrawerContent} from '../../_master/globalComponents/customDrawerContent';
 import {Categories} from '../categories';
-import {CustomDrawerContent} from '../../_master/globalComponents/drawer/CustomDrawerContent';
+import {Dashboard} from '../dashboard';
 import {Expenses} from '../expenses';
+import {StorageWrapper} from './storageWrapper';
 
 export type NavigationsParamList = {
   Dashboard: undefined;
@@ -17,14 +18,16 @@ const Drawer = createDrawerNavigator<NavigationsParamList>();
 
 export function Navigations() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={props => <CustomDrawerContent {...props} />}
-        initialRouteName="Dashboard">
-        <Drawer.Screen name="Dashboard" component={Dashboard} />
-        <Drawer.Screen name="Categories" component={Categories} />
-        <Drawer.Screen name="Expenses" component={Expenses} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <StorageWrapper>
+      <NavigationContainer>
+        <Drawer.Navigator
+          drawerContent={props => <CustomDrawerContent {...props} />}
+          initialRouteName="Dashboard">
+          <Drawer.Screen name="Dashboard" component={Dashboard} />
+          <Drawer.Screen name="Categories" component={Categories} />
+          <Drawer.Screen name="Expenses" component={Expenses} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </StorageWrapper>
   );
 }

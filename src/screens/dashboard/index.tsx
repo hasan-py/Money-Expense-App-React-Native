@@ -1,20 +1,14 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
 export function Dashboard() {
   const expensesData = useSelector((state: any) => state?.expenses);
 
   return (
-    <View style={{margin: 20}}>
-      <View
-        style={{
-          padding: 20,
-          backgroundColor: 'white',
-          elevation: 1,
-          borderRadius: 5,
-        }}>
-        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+    <View style={styles.wrapper}>
+      <View style={styles.totalCard}>
+        <Text style={styles.totalText}>
           {expensesData?.reduce(
             (acc: number, obj: any) => acc + obj?.amount,
             0,
@@ -30,3 +24,17 @@ export function Dashboard() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {margin: 20},
+  totalCard: {
+    padding: 20,
+    backgroundColor: 'white',
+    elevation: 1,
+    borderRadius: 5,
+  },
+  modalContainer: {
+    padding: 20,
+  },
+  totalText: {fontSize: 18, fontWeight: 'bold'},
+});

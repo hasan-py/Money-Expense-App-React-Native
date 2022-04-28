@@ -2,7 +2,13 @@ import React from 'react';
 import {Modal, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {COLORS, SIZES} from '../constant/themes';
 
-export default function GlobalModal({showModal, setShowModal, children}: any) {
+export default function GlobalModal({
+  showModal,
+  setShowModal,
+  children,
+  isSmall,
+  isMid,
+}: any) {
   return (
     <Modal
       visible={showModal}
@@ -12,7 +18,16 @@ export default function GlobalModal({showModal, setShowModal, children}: any) {
       <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
         <View style={styles.centeredView}>
           <TouchableWithoutFeedback onPress={() => false}>
-            <View style={styles.modalStyle}>{children}</View>
+            <View
+              style={
+                isSmall
+                  ? styles.modalStyleSmall
+                  : isMid
+                  ? styles.modalStyleMid
+                  : styles.modalStyle
+              }>
+              {children}
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
@@ -30,6 +45,18 @@ const styles = StyleSheet.create({
   modalStyle: {
     width: SIZES.width / 1.15,
     height: SIZES.height / 1.5,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+  },
+  modalStyleSmall: {
+    width: SIZES.width / 1.15,
+    height: SIZES.height / 4,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+  },
+  modalStyleMid: {
+    width: SIZES.width / 1.15,
+    height: SIZES.height / 2.5,
     backgroundColor: '#fff',
     borderRadius: 15,
   },
