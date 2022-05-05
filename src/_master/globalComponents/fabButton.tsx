@@ -1,9 +1,8 @@
-// @ts-nocheck
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-function FabButton(props) {
+function FabButton(props: any) {
   return (
     <>
       <TouchableOpacity

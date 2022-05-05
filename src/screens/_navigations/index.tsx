@@ -1,6 +1,6 @@
-import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 
 import {CustomDrawerContent} from '../../_master/globalComponents/customDrawerContent';
 import {Categories} from '../categories';

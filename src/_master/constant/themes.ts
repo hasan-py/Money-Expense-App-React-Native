@@ -14,6 +14,8 @@ export const COLORS = {
   primary: '#4c8d74',
   modalUnderBgColor: '#121E4499',
   disabled: '#63636333',
+  gray: 'gray',
+  white: 'white',
 };
 
 const appTheme = {COLORS, SIZES};

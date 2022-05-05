@@ -1,3 +1,4 @@
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState} from 'react';
 import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,20 +14,23 @@ export function Categories() {
 
   const dispatch = useDispatch();
 
+  // AsyncStorage.getAllKeys()
+  //   .then(keys => AsyncStorage.multiRemove(keys))
+  //   .then(() => alert('success'));
+
   return (
     <>
       <View style={styles.wrapper}>
-        <Text>Categories</Text>
-
         <FlatList
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{marginVertical: 10}}
           data={categoriesData}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({item, index}) => (
-            <>
-              <View style={styles.categoryCard}>
-                <Text>{`${index + 1}. ${item?.name}`}</Text>
-              </View>
-            </>
+            <View key={index} style={styles.categoryCard}>
+              <Text style={{fontSize: 20, marginRight: 10}}>{'🏷️'}</Text>
+              <Text style={{fontWeight: 'bold'}}>{item?.name}</Text>
+            </View>
           )}
         />
 
@@ -72,11 +76,14 @@ export function Categories() {
 const styles = StyleSheet.create({
   wrapper: {flex: 1},
   categoryCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 3,
     backgroundColor: 'white',
     elevation: 2,
-    marginVertical: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
   },
   modalContainer: {
     padding: 20,

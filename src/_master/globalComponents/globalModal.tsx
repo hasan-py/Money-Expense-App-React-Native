@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   modalStyleMid: {
     width: SIZES.width / 1.15,
-    height: SIZES.height / 2.5,
+    height: SIZES.height / 2.2,
     backgroundColor: '#fff',
     borderRadius: 15,
   },
