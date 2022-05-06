@@ -37,7 +37,7 @@ export function Categories() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {flex: 1},
+  wrapper: {flex: 1, marginHorizontal: 10},
   categoryCard: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -15,6 +15,7 @@ export const SIZES = {
 export const COLORS = {
   gray: '#334155',
   grayLight: '#e2e8f0',
+  placeholder: '#94a3b8',
   white: 'white',
   borderColor: '#cbd5e1',
   borderColorDark: '#475569',

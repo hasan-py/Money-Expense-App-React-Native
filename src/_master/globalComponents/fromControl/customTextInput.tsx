@@ -16,10 +16,12 @@ export function CustomTextInput(props: any) {
           value={value}
           placeholder={'Category Name'}
           name={name}
+          placeholderTextColor={COLORS.placeholder}
           style={{
             borderBottomWidth: 1,
             borderColor: COLORS.borderColorDark,
             marginBottom: 20,
+            color: COLORS.gray,
             paddingVertical: 5,
           }}
           {...props}

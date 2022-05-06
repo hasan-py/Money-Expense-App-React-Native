@@ -27,7 +27,8 @@ export function CustomSelect(props: any) {
             setBottomModal(true);
           }}>
           <View style={styles.selectWrapper}>
-            <TextCustom style={{color: COLORS.gray}}>
+            <TextCustom
+              style={{color: value.label ? COLORS.gray : COLORS.placeholder}}>
               {value.label || 'Select one'}
             </TextCustom>
 

@@ -72,7 +72,7 @@ export function Dashboard() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {flex: 1, margin: 10},
+  wrapper: {flex: 1, marginHorizontal: 20, marginVertical: 10},
   totalCard: {
     padding: 20,
     backgroundColor: COLORS.white,

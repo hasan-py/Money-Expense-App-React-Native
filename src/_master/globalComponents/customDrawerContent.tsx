@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLORS} from '../constant/themes';
 import TextCustom from './TextCustom';
@@ -18,7 +18,10 @@ export function CustomDrawerContent(props: any) {
     <>
       <View style={styles.logoTextWrapper}>
         <View style={styles.logoWrapper}>
-          <Icon name={'cash-fast'} size={25} color={COLORS.white} />
+          <Image
+            style={styles.logo}
+            source={require('../../../assets/MoneyExpense.png')}
+          />
         </View>
         <TextCustom isBold style={styles.logoText}>
           Money Expense
@@ -26,10 +29,12 @@ export function CustomDrawerContent(props: any) {
       </View>
 
       {drawerMenu?.map((item, index) => (
-        <View key={index} style={{margin: 5}}>
+        <View key={index} style={{margin: 10}}>
           <TouchableOpacity
-            onPress={() => {
+            onPress={e => {
+              console.log('E', JSON.stringify(e.eventPhase, null, 2));
               navigation.navigate(item?.link);
+              // setTimeout(() => {}, 500);
             }}
             style={{
               ...styles.menu,
@@ -49,10 +54,12 @@ export function CustomDrawerContent(props: any) {
 
 const styles = StyleSheet.create({
   logoWrapper: {
-    backgroundColor: COLORS.gray,
-    padding: 5,
+    marginLeft: 15,
+  },
+  logo: {
+    width: 30,
+    height: 30,
     borderRadius: 5,
-    marginLeft: 10,
   },
   logoTextWrapper: {
     paddingVertical: 15,

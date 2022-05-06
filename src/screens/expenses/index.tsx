@@ -85,7 +85,7 @@ export function Expenses() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {flex: 1, marginHorizontal: 10},
+  wrapper: {flex: 1, marginHorizontal: 20},
   tabWrapper: {
     marginTop: 8,
     marginBottom: 5,

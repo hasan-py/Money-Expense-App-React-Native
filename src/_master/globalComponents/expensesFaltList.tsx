@@ -13,19 +13,23 @@ export function ExpensesFlatList({expensesData}: any) {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({item, index}) => (
           <View key={index} style={styles.expensesCard}>
-            <TextCustom style={styles.moneyEmoji}>{'💸'}</TextCustom>
-            <View style={{flexDirection: 'column'}}>
+            <View>
+              <TextCustom style={styles.moneyEmoji}>{'💸'}</TextCustom>
+            </View>
+
+            <View>
               <TextCustom isBold>{item?.expenseName}</TextCustom>
-              <TextCustom>{item?.category?.label}</TextCustom>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <TextCustom>{item?.category?.label}</TextCustom>
                 <TextCustom>
-                  {+item?.amount ? (+item?.amount?.toString()).toFixed(2) : 0}
-                  {' ৳'}
-                </TextCustom>
-                <TextCustom style={{marginLeft: 10, fontSize: 12}}>
+                  {' | '}
                   {moment(item?.createdAt).format('DD ddd yyyy')}
                 </TextCustom>
               </View>
+              <TextCustom>
+                {+item?.amount ? (+item?.amount?.toString()).toFixed(2) : 0}
+                {' ৳'}
+              </TextCustom>
             </View>
           </View>
         )}
