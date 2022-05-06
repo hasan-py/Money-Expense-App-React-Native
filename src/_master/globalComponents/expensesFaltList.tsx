@@ -13,8 +13,8 @@ export function ExpensesFlatList({expensesData}: any) {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({item, index}) => (
           <View key={index} style={styles.expensesCard}>
-            <View>
-              <TextCustom style={styles.moneyEmoji}>{'💸'}</TextCustom>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextCustom style={styles.moneyEmoji}>{'৳'}</TextCustom>
             </View>
 
             <View>
@@ -47,5 +47,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 5,
   },
-  moneyEmoji: {fontSize: 40, marginRight: 10},
+  moneyEmoji: {
+    fontSize: 30,
+    marginRight: 10,
+    backgroundColor: '#dcfce7',
+    opacity: 0.5,
+    color: '#14532d',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 10,
+  },
 });

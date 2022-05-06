@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {COLORS} from '../../_master/constant/themes';
 import {NoDataFound} from '../../_master/globalComponents/noDataFound';
@@ -22,8 +23,12 @@ export function Categories() {
           keyExtractor={(_, index) => index.toString()}
           renderItem={({item, index}) => (
             <View key={index} style={styles.categoryCard}>
-              <TextCustom style={{fontSize: 20, marginRight: 10}}>
-                {'🏷️'}
+              <TextCustom style={styles.catIconWrapper}>
+                <Icon
+                  name={'expand-all-outline'}
+                  size={20}
+                  color={COLORS.gray}
+                />
               </TextCustom>
               <TextCustom isBold>{item?.name}</TextCustom>
             </View>
@@ -50,5 +55,12 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     padding: 20,
+  },
+  catIconWrapper: {
+    marginRight: 10,
+    backgroundColor: COLORS.grayLight,
+    padding: 5,
+    borderRadius: 5,
+    opacity: 0.5,
   },
 });

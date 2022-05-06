@@ -29,20 +29,18 @@ export function CustomDrawerContent(props: any) {
       </View>
 
       {drawerMenu?.map((item, index) => (
-        <View key={index} style={{margin: 10}}>
+        <View key={index} style={{marginHorizontal: 10, marginVertical: 8}}>
           <TouchableOpacity
-            onPress={e => {
-              console.log('E', JSON.stringify(e.eventPhase, null, 2));
+            onPress={() => {
               navigation.navigate(item?.link);
-              // setTimeout(() => {}, 500);
             }}
             style={{
               ...styles.menu,
               backgroundColor:
                 state?.index === index ? COLORS.grayLight : COLORS.white,
             }}>
-            <Icon name={item?.icon || 'home'} size={24} color={COLORS.gray} />
-            <TextCustom isBold style={{marginLeft: 10}}>
+            <Icon name={item?.icon} size={26} color={COLORS.gray} />
+            <TextCustom isBold style={{marginLeft: 10, fontSize: 16}}>
               {item?.link}
             </TextCustom>
           </TouchableOpacity>
@@ -57,16 +55,16 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   logo: {
-    width: 30,
-    height: 30,
+    width: 45,
+    height: 45,
     borderRadius: 5,
   },
   logoTextWrapper: {
-    paddingVertical: 15,
+    paddingVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.borderColor,
+    borderBottomColor: COLORS.borderColorLight,
     marginBottom: 10,
   },
   logoText: {

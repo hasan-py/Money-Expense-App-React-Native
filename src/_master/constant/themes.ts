@@ -18,6 +18,7 @@ export const COLORS = {
   placeholder: '#94a3b8',
   white: 'white',
   borderColor: '#cbd5e1',
+  borderColorLight: '#e2e8f0',
   borderColorDark: '#475569',
   modalUnderBgColor: '#121E4499',
 };
