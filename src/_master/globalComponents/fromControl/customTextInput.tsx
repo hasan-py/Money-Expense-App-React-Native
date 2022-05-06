@@ -1,5 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
+import {COLORS} from '../../constant/themes';
+import TextCustom from '../TextCustom';
 
 export function CustomTextInput(props: any) {
   const {setValue, value, name, label} = props;
@@ -7,7 +10,7 @@ export function CustomTextInput(props: any) {
   return (
     <>
       <View>
-        <Text style={{fontWeight: 'bold'}}>{label}</Text>
+        <TextCustom isBold>{label}</TextCustom>
         <TextInput
           onChangeText={e => setValue(e)}
           value={value}
@@ -15,7 +18,7 @@ export function CustomTextInput(props: any) {
           name={name}
           style={{
             borderBottomWidth: 1,
-            borderColor: 'gray',
+            borderColor: COLORS.borderColorDark,
             marginBottom: 20,
             paddingVertical: 5,
           }}

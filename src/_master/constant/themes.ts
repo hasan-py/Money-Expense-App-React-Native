@@ -1,5 +1,6 @@
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('window');
+
 export const SIZES = {
   h1: 24,
   h2: 20,
@@ -10,12 +11,14 @@ export const SIZES = {
   width,
   height,
 };
+
 export const COLORS = {
-  primary: '#4c8d74',
-  modalUnderBgColor: '#121E4499',
-  disabled: '#63636333',
-  gray: 'gray',
+  gray: '#334155',
+  grayLight: '#e2e8f0',
   white: 'white',
+  borderColor: '#cbd5e1',
+  borderColorDark: '#475569',
+  modalUnderBgColor: '#121E4499',
 };
 
 const appTheme = {COLORS, SIZES};

@@ -1,25 +1,15 @@
-import moment from 'moment';
 import React, {useEffect, useState} from 'react';
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {expensesSliceActions} from '../../redux/slices';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {COLORS} from '../../_master/constant/themes';
-import FabButton from '../../_master/globalComponents/fabButton';
-import {CustomSelect} from '../../_master/globalComponents/fromControl/customSelect';
-import {CustomTextInput} from '../../_master/globalComponents/fromControl/customTextInput';
-import GlobalModal from '../../_master/globalComponents/globalModal';
+import {ExpensesFlatList} from '../../_master/globalComponents/expensesFaltList';
+import {NoDataFound} from '../../_master/globalComponents/noDataFound';
+import TextCustom from '../../_master/globalComponents/TextCustom';
+import {CreateExpensesModal} from './components/createExpenseModal';
+import {FilterExpensesModal} from './components/filterExpenseModal';
 
 export function Expenses() {
-  const dispatch = useDispatch();
   const expensesDataStore = useSelector((state: any) => state.expenses);
-  const categoriesListStore = useSelector((state: any) => state?.categories);
 
   const [showModal, setShowModal] = useState(false);
   const [filterModal, setFilterModal] = useState(false);
@@ -29,16 +19,16 @@ export function Expenses() {
     setExpensesData(expensesDataStore);
   }, [expensesDataStore]);
 
+  /* Initial State for form control */
   const [formData, setFormData] = useState<any>({
     expenseName: '',
     amount: '',
     category: '',
+    fromDate: new Date(),
+    toDate: new Date(),
   });
 
-  const clearFormData = (setter: Function) => {
-    setter({expenseName: '', amount: '', category: ''});
-  };
-
+  /* State Setter */
   const setFieldValue = (key: string, value: any) => {
     setFormData({
       ...formData,
@@ -46,149 +36,48 @@ export function Expenses() {
     });
   };
 
-  const filterDataHandler = () => {
-    const filterData = expensesDataStore?.filter(
-      (item: any) => item?.category?.value === formData?.category?.value,
-    );
-    setExpensesData(filterData);
-    setFilterModal(false);
-  };
-
   return (
     <>
       <View style={styles.wrapper}>
+        {/* Tab Section */}
         <View style={styles.tabWrapper}>
           <TouchableOpacity
             onPress={() => {
               setExpensesData(expensesDataStore);
             }}>
-            <Text style={styles.btnTabActive}>Last Month</Text>
+            <TextCustom style={styles.btnTab}>All Expenses</TextCustom>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              clearFormData(setFormData);
               setFilterModal(true);
             }}>
-            <Text style={styles.btnTab}>Filter Expenses</Text>
+            <TextCustom style={styles.btnTabActive}>Filter Expenses</TextCustom>
           </TouchableOpacity>
         </View>
 
-        <FlatList
-          data={expensesData}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({item, index}) => (
-            <View key={index} style={styles.expensesCard}>
-              <Text style={styles.moneyEmoji}>{'💸'}</Text>
-              <View style={{flexDirection: 'column'}}>
-                <Text style={{fontWeight: 'bold'}}>{item?.expenseName}</Text>
-                <Text>{item?.category?.label}</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text>
-                    {+item?.amount ? (+item?.amount?.toString()).toFixed(2) : 0}
-                    {' ৳'}
-                  </Text>
-                  <Text style={{marginLeft: 10, fontSize: 12}}>
-                    {moment(item?.createdAt).format('DD ddd yyyy hh:mm A')}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          )}
+        {/* No Data Found */}
+        <NoDataFound data={expensesData} message="No expense available" />
+
+        {/* All Expense's List View */}
+        <ExpensesFlatList expensesData={expensesData} />
+
+        {/* Create Expense's Modal */}
+        <CreateExpensesModal
+          formData={formData}
+          setFormData={setFormData}
+          setFieldValue={setFieldValue}
+          showModal={showModal}
+          setShowModal={setShowModal}
         />
 
-        {/* Create Catergory Modal */}
-        <GlobalModal isMid showModal={showModal} setShowModal={setShowModal}>
-          <View style={styles.modalContainer}>
-            <CustomTextInput
-              setValue={(e: string) => setFieldValue('expenseName', e)}
-              value={formData?.expenseName}
-              name={'expenseName'}
-              label={'Expense Name'}
-              placeholder={'Type a expense name'}
-            />
-
-            <CustomTextInput
-              setValue={(e: string) => setFieldValue('amount', e)}
-              value={formData?.amount}
-              name={'amount'}
-              keyboardType={'numeric'}
-              label={'Amount ৳'}
-              placeholder={'Amount'}
-            />
-
-            <CustomSelect
-              setValue={(e: string) => setFieldValue('category', e)}
-              value={formData?.category}
-              name={'category'}
-              keyboardType={'numeric'}
-              label={'Category'}
-              placeholder={'Category'}
-              options={
-                categoriesListStore?.map((item: any) => {
-                  return {
-                    value: item?.id,
-                    label: item?.name,
-                  };
-                }) || []
-              }
-            />
-
-            <View>
-              <Button
-                disabled={
-                  formData?.expenseName?.length === 0 ||
-                  formData?.amount?.length === 0 ||
-                  !formData?.category?.value
-                }
-                onPress={() => {
-                  dispatch(expensesSliceActions.addExpense(formData));
-                  clearFormData(setFormData);
-                  setShowModal(false);
-                }}
-                title="Add Expense"
-              />
-            </View>
-          </View>
-        </GlobalModal>
-
-        <GlobalModal
-          isMid
-          showModal={filterModal}
-          setShowModal={setFilterModal}>
-          <View style={styles.modalContainer}>
-            <CustomSelect
-              setValue={(e: string) => setFieldValue('category', e)}
-              value={formData?.category}
-              name={'category'}
-              keyboardType={'numeric'}
-              label={'Category'}
-              placeholder={'Category'}
-              options={
-                categoriesListStore?.map((item: any) => {
-                  return {
-                    value: item?.id,
-                    label: item?.name,
-                  };
-                }) || []
-              }
-            />
-
-            <View>
-              <Button
-                onPress={() => {
-                  filterDataHandler();
-                }}
-                title="View Expenses"
-              />
-            </View>
-          </View>
-        </GlobalModal>
-
-        <FabButton
-          onPress={() => {
-            setShowModal(true);
-          }}
+        {/* Filter Expense's Modal */}
+        <FilterExpensesModal
+          formData={formData}
+          setExpensesData={setExpensesData}
+          setFieldValue={setFieldValue}
+          filterModal={filterModal}
+          setFilterModal={setFilterModal}
         />
       </View>
     </>
@@ -196,29 +85,16 @@ export function Expenses() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {flex: 1},
-  expensesCard: {
-    padding: 15,
-    borderRadius: 3,
-    backgroundColor: 'white',
-    elevation: 2,
-    flexDirection: 'row',
-    marginVertical: 5,
-    marginHorizontal: 10,
-  },
-  modalContainer: {
-    padding: 20,
-  },
+  wrapper: {flex: 1, marginHorizontal: 10},
   tabWrapper: {
     marginTop: 8,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
   },
   btnTabActive: {
-    color: COLORS.primary,
+    color: COLORS.gray,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -226,5 +102,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.gray,
   },
-  moneyEmoji: {fontSize: 40, marginRight: 10},
 });

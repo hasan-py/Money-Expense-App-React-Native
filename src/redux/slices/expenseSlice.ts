@@ -15,12 +15,12 @@ export const expensesSlice = createSlice({
     addExpense: (state, action) => {
       const {payload} = action;
       const currentDateTime = moment().format();
-
       state.push({
         ...payload,
-        createdAt: currentDateTime,
+        id: `expense-${state.length + 1}`,
         updatedAt: currentDateTime,
       });
+
       state.reverse(); // For Descending Order
       setAsyncStorage('@expenses', state);
       return state;

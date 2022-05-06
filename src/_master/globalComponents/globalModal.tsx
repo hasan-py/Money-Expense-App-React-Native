@@ -44,20 +44,20 @@ const styles = StyleSheet.create({
   },
   modalStyle: {
     width: SIZES.width / 1.15,
-    height: SIZES.height / 1.5,
-    backgroundColor: '#fff',
+    height: SIZES.height / 2.2,
+    backgroundColor: COLORS.white,
     borderRadius: 15,
   },
   modalStyleSmall: {
     width: SIZES.width / 1.15,
-    height: SIZES.height / 4,
-    backgroundColor: '#fff',
+    height: SIZES.height / 4.2,
+    backgroundColor: COLORS.white,
     borderRadius: 15,
   },
   modalStyleMid: {
     width: SIZES.width / 1.15,
-    height: SIZES.height / 2.2,
-    backgroundColor: '#fff',
+    height: SIZES.height / 1.8,
+    backgroundColor: COLORS.white,
     borderRadius: 15,
   },
 });

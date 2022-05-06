@@ -3,13 +3,14 @@ import {
   FlatList,
   Modal,
   StyleSheet,
-  Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLORS, SIZES} from '../../constant/themes';
+import {NoDataFound} from '../noDataFound';
+import TextCustom from '../TextCustom';
 
 export function CustomSelect(props: any) {
   const {setValue, value, name, label, options} = props;
@@ -19,21 +20,21 @@ export function CustomSelect(props: any) {
   return (
     <>
       <View>
-        <Text style={styles.fontBold}>{label}</Text>
+        <TextCustom isBold>{label}</TextCustom>
 
         <TouchableOpacity
           onPress={() => {
             setBottomModal(true);
           }}>
           <View style={styles.selectWrapper}>
-            <Text style={{color: COLORS.gray}}>
+            <TextCustom style={{color: COLORS.gray}}>
               {value.label || 'Select one'}
-            </Text>
+            </TextCustom>
 
             <Icon
               name={'arrow-down-drop-circle-outline'}
               size={16}
-              color={'gray'}
+              color={COLORS.gray}
             />
           </View>
         </TouchableOpacity>
@@ -49,7 +50,14 @@ export function CustomSelect(props: any) {
             <TouchableWithoutFeedback onPress={() => false}>
               <View style={styles.modalStyle}>
                 <>
-                  <Text style={styles.header}>{'Select one' || name}</Text>
+                  <TextCustom style={styles.header}>
+                    {'Select one' || name}
+                  </TextCustom>
+
+                  <NoDataFound
+                    data={options}
+                    message="No categories available"
+                  />
 
                   <FlatList
                     data={options || []}
@@ -69,12 +77,12 @@ export function CustomSelect(props: any) {
                               : 'checkbox-blank-circle-outline'
                           }
                           size={20}
-                          color={'gray'}
+                          color={COLORS.gray}
                         />
 
-                        <Text style={styles.textLabel}>
+                        <TextCustom style={styles.textLabel}>
                           {item?.label || ''}
-                        </Text>
+                        </TextCustom>
                       </TouchableOpacity>
                     )}
                   />
@@ -91,7 +99,7 @@ export function CustomSelect(props: any) {
 const styles = StyleSheet.create({
   selectWrapper: {
     borderBottomWidth: 1,
-    borderColor: 'gray',
+    borderColor: COLORS.gray,
     marginBottom: 20,
     paddingHorizontal: 5,
     paddingVertical: 10,
@@ -108,7 +116,7 @@ const styles = StyleSheet.create({
   modalStyle: {
     width: SIZES.width,
     height: SIZES.height / 2,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
     padding: 20,
@@ -119,13 +127,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderColor: 'gray',
+    borderColor: COLORS.borderColor,
+    color: COLORS.gray,
   },
   textLabelWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
+    color: COLORS.gray,
   },
-  textLabel: {fontSize: 20, marginLeft: 5},
-  fontBold: {fontWeight: 'bold'},
+  textLabel: {fontSize: 20, marginLeft: 5, color: COLORS.gray},
 });
