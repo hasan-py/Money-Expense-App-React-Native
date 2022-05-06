@@ -264,6 +264,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-splash-screen')
+    
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
