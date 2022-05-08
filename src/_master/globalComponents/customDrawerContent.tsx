@@ -32,7 +32,9 @@ export function CustomDrawerContent(props: any) {
         <View key={index} style={{marginHorizontal: 10, marginVertical: 8}}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(item?.link);
+              if (state?.index !== index) {
+                return navigation.navigate(item?.link);
+              }
             }}
             style={{
               ...styles.menu,
